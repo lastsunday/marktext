@@ -162,6 +162,12 @@ const actions = {
   DISPATCH_EDITOR_VIEW_STATE (_, viewState) {
     const { windowId } = global.marktext.env
     ipcRenderer.send('mt::view-layout-changed', windowId, viewState)
+  },
+
+  TOGGLE_SOURCE_CODE_VIEW ({ commit, dispatch, state }) {
+    let entryName = 'sourceCode'
+    commit('TOGGLE_VIEW_MODE', entryName)
+    dispatch('DISPATCH_EDITOR_VIEW_STATE', { [entryName]: state[entryName] })
   }
 }
 

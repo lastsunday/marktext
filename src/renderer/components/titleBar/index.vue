@@ -39,6 +39,19 @@
           <span class="text-center-vertical">&#9776;</span>
         </div>
         <el-tooltip
+          class="item"
+          :content="`Source Code Mode`"
+          placement="bottom-end"
+        >
+          <div
+            class="word-count"
+            :class="[{ 'title-no-drag': platform !== 'darwin' }]"
+            @click.stop="handleChangeSourceCode"
+          >
+            <div class="item">&lt;&sol;&gt;</div>
+          </div>
+        </el-tooltip>
+        <el-tooltip
           v-if="wordCount"
           class="item"
           :content="`${wordCount[show]} ${HASH[show].full + (wordCount[show] > 1 ? 's' : '')}`"
@@ -187,6 +200,9 @@ export default {
       index += 1
       if (index >= len) index = 0
       this.show = ITEMS[index]
+    },
+    handleChangeSourceCode () {
+      this.$store.dispatch('TOGGLE_SOURCE_CODE_VIEW')
     },
 
     handleCloseClick () {
